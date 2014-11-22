@@ -37,9 +37,10 @@ function Module(path, name) {
 
 		var db = new sqlite3.Database(this.path);
 		var result = "";
-		var word = txt.toString();
-		//console.log("select book, chapter, verse from contents where txt like '%" + word + "%' order by serial");
-		db.all("select book, chapter, verse, txt from contents where txt like '%" + word + "%' order by serial", 
+		var word = '%' + txt + '%';
+
+		db.all("select book, chapter, verse, txt from contents where txt like ? order by serial",
+			word, 
 			function(err, rows) {
 				result = "";
 				rows.forEach( function(row) {
@@ -62,16 +63,14 @@ After document is loaded (and displayed), we will start scanning the folder with
 $(document).ready(
 	function() {
 
-	var module = new Module('/Users/timothyha/Projects/interbiblia_modules/kjv.sqlite', 'RstStrong'); 
+	var module = new Module('/Users/timothyha/Projects/interbiblia_modules/russian.sqlite', 'RstStrong'); 
 
 	$("#maintext").html('Ay up me duck!  Welcome to the playground.');
 
 	$("#searchbutton").click(
 		function() {
 			var word = ($("#searchbox").val());
-			console.log(word);
 			module.searchText(word, function(result) {
-				//console.log(result);
 				$("#maintext").html(result);
 			});
 		});
