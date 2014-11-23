@@ -77,3 +77,17 @@ $(document).ready(
 	}
 );
 
+/**
+
+when db file is not present we are having errors with db and rows
+
+timothyha@iMac-2:~/Dropbox/Node.js/Projects/interbiblia-desktop/playground$nw .
+2014-11-23 08:31:55.817 node-webkit[22281:1017784] Internals of CFAllocator not known; out-of-memory failures via CFAllocator will not result in termination. http://crbug.com/45650
+[22281:1123/083155:ERROR:breakpad_mac.mm(238)] Breakpad initializaiton failed
+2014-11-23 08:31:56.198 node-webkit Helper[22282:1017841] Internals of CFAllocator not known; out-of-memory failures via CFAllocator will not result in termination. http://crbug.com/45650
+2014-11-23 08:31:56.533 node-webkit Helper[22283:1017875] Internals of CFAllocator not known; out-of-memory failures via CFAllocator will not result in termination. http://crbug.com/45650
+[22281:1123/083157:INFO:CONSOLE(1)] ""process.mainModule.filename: /Users/timothyha/Dropbox/Node.js/Projects/interbiblia-desktop/playground/index.html"", source: process_main (1)
+[22281:1123/083203:INFO:CONSOLE(28)] "Uncaught TypeError: Cannot read property 'forEach' of undefined", source: /Users/timothyha/Projects/Node.js/node_modules/sqlite3/lib/trace.js (28)
+timothyha@iMac-2:~/Dropbox/Node.js/Projects/interbiblia-desktop/playground$nw .
+
+**/
