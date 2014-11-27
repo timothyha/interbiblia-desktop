@@ -1,0 +1,30 @@
+#searchboxdiv 
+{
+    //position: fixed;
+    //left: 0px;
+    //top: 0px;
+    //height: 30px;
+    //z-index: 1000;
+    margin-bottom: 30px;
+    text-align: center;
+    //background-color: #C0C0C0;
+}
+
+#mainbody
+{
+    position: relative;
+}
+
+#searchbox
+{
+    font-size: 18px;
+    text-align: center;
+}
+
+body
+{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
