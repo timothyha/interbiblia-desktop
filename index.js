@@ -14,38 +14,37 @@ var nw = require('nw.gui');
 var win = nw.Window.get();
 var nativeMenuBar = new nw.Menu({ type: "menubar" });
 if(/^darwin/.test(process.platform))
-	nativeMenuBar.createMacBuiltin("Playground", { hideEdit: true, hideWindow: true });
+	nativeMenuBar.createMacBuiltin("InterBiblia Desktop", { hideEdit: true, hideWindow: true });
 win.menu = nativeMenuBar;
 
+var appInterBiblia = angular.module('interbiblia', []);
+var module = interbiblia.ModuleFindClass('/Users/timothyha/Projects/interbiblia_modules/russian.sqlite'); 
 
-/**
+appInterBiblia.controller('appBodyController', function($scope) {
+	$scope.inputSearchPhrase = '';
+	$scope.maintext = {content: ''};
+	$scope.searchresults = {content: ''};
 
-After document is loaded (and displayed), we will start scanning the folder with modules and display their names.  Meanwhile a collection of module objects will be created for future search operations.
+	$scope.$watch("inputSearchPhrase", function(newValue, oldValue) {
+		var txt = newValue;
 
-**/
-$(document).ready(function()
-{
-	var module = new interbiblia.Module('/Users/timothyha/Projects/interbiblia_modules/russian.sqlite', 'RstStrong'); 
-
-	$("#maintext").html('Ay up me duck!  Welcome to the playground.');
-
-	// when to search? 
-	// when Enter key is pressed or when there are more than two words on the line
-	$("#searchbox").keypress(function(e)
-	{ 
-		var txt = ($("#searchbox").val());
-		if((e.which==13) || (txt.trim().replace(/\s+/g, " ").split(" ").length > 1))
-		{
-			module.searchText(txt, function(result)
+		if((txt.length > 4) || (txt.trim().replace(/\s+/g, " ").split(" ").length > 1)) {
+			module.searchText(txt, function(err, result)
 			{
-				$("#maintext").html(result);
+				$scope.searchresults = {content: result};
 			});
 		}
 	});
+});
+
+/**
+
+$(document).ready(function()
+{
 
 	$("#testlink").click(function() 
 	{
-		module.getBookChapter(1,1, function(refs)
+		module.getBookChapter(1,1, function(err, refs)
 		{
 			var txt = "";
 			refs.forEach( function(ref)
@@ -58,4 +57,8 @@ $(document).ready(function()
 	});
 
 }); // end of document .ready
+
+After document is loaded (and displayed), we will start scanning the folder with modules and display their names.  Meanwhile a collection of module objects will be created for future search operations.
+
+**/
 
